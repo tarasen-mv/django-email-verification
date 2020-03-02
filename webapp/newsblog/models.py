@@ -8,6 +8,12 @@ class Post(models.Model):
     pub_date = models.DateTimeField('date published')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    image = models.BooleanField(default=False)
+
+    @property
+    def short_text(self):
+        return self.text[:100] + '...'
+
     def __str__(self):
         return self.title
 
