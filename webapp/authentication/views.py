@@ -20,14 +20,14 @@ def log_in(request):
 				login(request, user)
 				return HttpResponseRedirect('/')
 
-			else:
-				form = LoginForm(error_class='1488')
-
-				context = {
-					'form': form
-				}
-
-				return render(request, 'authentication/login.html', context)
+			# else:
+			# 	form = LoginForm(error_class='1488')
+			#
+			# 	context = {
+			# 		'form': form
+			# 	}
+			#
+			# 	return render(request, 'authentication/login.html', context)
 
 	form = LoginForm()
 
@@ -48,9 +48,9 @@ def add_user(request):
 	form = AddUserForm(request.POST or None)
 	if form.is_valid():
 		User.objects.create_user(
-			username=form.clean_data['username'],
-			password=form.clean_data['password1'],
-			email=form.clean_data['email']
+			username=form.cleaned_data['username'],
+			password=form.cleaned_data['password'],
+			email=form.cleaned_data['email']
 		)
 		return HttpResponseRedirect('/')
 
